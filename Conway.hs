@@ -1,6 +1,6 @@
 import qualified Data.List as L
 
-vecinosVivos :: [Bool]->Int
+vecinosVivos :: [Bool] -> Int
 vecinosVivos vecinos = length $ filter (\x -> x == True) vecinos
 
 reglaUno :: Bool -> Int -> Bool

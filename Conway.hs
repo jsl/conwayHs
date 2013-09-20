@@ -21,5 +21,26 @@ reglaCuatro elemento numeroVivos
       numeroVivos == 3 = True
     | otherwise        = elemento
 
-conway :: Bool -> [Bool] -> Bool
-conway elemento vecinos = undefined
+
+elementBy :: (Int, Int) -> (Int, Int) -> [[a]] -> Maybe a
+elementBy (curX, curY) (chgX, chgY) juego =
+    if newX > -1 && newY > -1 && newY < length juego &&
+       newX < length (juego !! newY) then
+        Just $ juego !! newY !! newX
+    else
+        Nothing
+    where newX = curX + chgX
+          newY = curY + chgY
+
+posicionesDeVecinos = [ (-1, -1), (0, -1), (-1, 1)
+                      , (-1, 0),  (1, 0)
+                      , (1, -1),  (0, 1),  (1, 1)]
+
+vecinos :: (Int, Int) -> [[a]] -> [a]
+vecinos (x, y) juego = foldl
+                (\vs (x', y') ->
+                     case elementBy (x, y) (x', y') juego of
+                       Nothing  -> vs
+                       Just elt -> elt : vs)
+                []
+                posicionesDeVecinos

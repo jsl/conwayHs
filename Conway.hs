@@ -1,19 +1,13 @@
 import qualified Data.List as L
 
 vecinosVivos :: [Bool]->Int
-vecinosVivos vecinos = length $
-                          filter (\x -> x == True)
-                          vecinos
+vecinosVivos vecinos = length $ filter (\x -> x == True) vecinos
 
 reglaUno :: Bool -> Int -> Bool
 reglaUno elemento numeroVivos = numeroVivos < 2
 
 reglaDos :: Bool -> Int -> Bool
-reglaDos elemento numeroVivos =
-    if L.elem numeroVivos [2,3] && elemento then
-       True
-    else
-       False
+reglaDos elemento numeroVivos = elemento && L.elem numeroVivos [2,3]
 
 reglaTres :: Bool -> Int -> Bool
 reglaTres elemento numeroVivos
